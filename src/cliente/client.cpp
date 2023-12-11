@@ -38,7 +38,7 @@ int main(){
     cout << "Introduce el numero de puerto...\n";
     cin >> port;
     try{
-        SocketClient s("localhost", "3000");
+        SocketClient s(host, port);
         thread senderThread(SenderProccess, s);
         thread recieverThread(RecieverProccess, s);
         senderThread.join();

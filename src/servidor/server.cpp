@@ -46,8 +46,15 @@ unsigned __stdcall Connection(void* a){
 }
 
 int main(int argc, char **argv){
-    SocketServer server("3000");
-    std::cout << "Servidor de mensajeria iniciado en el puerto 3000\n";
+    std::string  port;
+
+    std::cout<<"Ingresa el puerto en el que desea iniciar el servidor...\n";
+
+    std::cin>>port;
+
+    SocketServer server(port);
+
+    std::cout << "Servidor de mensajeria iniciado en el puerto: "<<port<<'\n';
 
     while(1){
         Socket* s = server.Accept();
