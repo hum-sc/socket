@@ -24,13 +24,19 @@ void RecieverProccess(Socket s){
         std::string recievedLine = "";
         recievedLine = s.Recieve();
         if(recievedLine == "") continue;
+        if(recievedLine=="exit()")break;
         std::cout <<"R: "<< recievedLine<<'\n';
         cout.flush();
-        if(recievedLine=="exit()")break;
     }
 }
 
 int main(){
+
+    string host, port;
+    cout << "Introduce la direccion del host... \n";
+    cin >> host;
+    cout << "Introduce el numero de puerto...\n";
+    cin >> port;
     try{
         SocketClient s("localhost", "3000");
         thread senderThread(SenderProccess, s);

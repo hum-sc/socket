@@ -71,20 +71,27 @@ void Socket::close() {
 }
 
 std::string Socket::Recieve() {
-    char recvbuf[DEFAULT_BUF_LEN];
     std::string line = "";
-    int iResult = recv(socket_, recvbuf, DEFAULT_BUF_LEN, 0);
-    if(iResult == 0) {
-        return line;
-    } else if(iResult == -1){
-        return "";
+
+    while(true){
+        char c;
+        switch (recv(socket_, &c, 1, 0)) {
+            case 0:
+                return line;
+            case -1:
+                return "";
+
+        }
+        if(c == '\n') {
+            return line;
+        }
+        line += c;
     }
-    line = recvbuf;
     return line;
 }
 
 void Socket::Send(std::string s) {
-    std::cout<<s<<" local";
+    s+='\n';
     send(socket_, s.c_str(),s.length(), 0);
 }
 

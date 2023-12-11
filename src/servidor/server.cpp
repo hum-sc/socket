@@ -23,7 +23,7 @@ unsigned __stdcall Connection(void* a){
     while(true){
         std::string response = s->Recieve();
 
-        if(response == "exit()"||response.empty()) {
+        if(response == "exit()") {
             s->Send("exit()");
             break;
         }
@@ -47,7 +47,7 @@ unsigned __stdcall Connection(void* a){
 
 int main(int argc, char **argv){
     SocketServer server("3000");
-    std::cout << "Servidor de mensajeria iniciado en el puerto 3000";
+    std::cout << "Servidor de mensajeria iniciado en el puerto 3000\n";
 
     while(1){
         Socket* s = server.Accept();
